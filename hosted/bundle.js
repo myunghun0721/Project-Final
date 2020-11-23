@@ -1,6 +1,6 @@
 "use strict";
 
-var handleDomo = function handleDomo(e) {
+var handleLocation = function handleLocation(e) {
   e.preventDefault(0);
   $("#eMessage").animate({
     width: 'hide'
@@ -12,15 +12,43 @@ var handleDomo = function handleDomo(e) {
   }
 
   sendAjax('POST', $("#locForm").attr("action"), $("#locForm").serialize(), function () {
-    loadDomosFromServer();
+    loadLocationsFromServer();
   });
   return false;
+}; // delete locations
+
+
+var deleteLocation = function deleteLocation(e) {
+  e.preventDefault();
+  sendAjax('POST', '/deleteLocation', "_csrf=".concat(document.querySelector("#_csrfID").value, "&location_id=").concat(e.target.getAttribute("data-location-id")), function () {
+    loadLocationsFromServer();
+  });
+  return false;
+}; // copy x z coordinate
+
+
+var copyText = function copyText(e) {
+  e.preventDefault();
+  var xPos = "".concat(e.target.getAttribute("data-location-z"));
+  var zPos = "".concat(e.target.getAttribute("data-location-x")); // tp 1058 71 -827
+
+  var coordinate = "tp";
+  coordinate += " ".concat(xPos);
+  coordinate += "";
+  coordinate += " ".concat(zPos);
+  var el = document.createElement('textarea');
+  el.value = coordinate;
+  document.body.appendChild(el);
+  el.select();
+  document.execCommand('copy');
+  document.body.removeChild(el);
+  alert("Copied!");
 };
 
 var LocForm = function LocForm(props) {
   return /*#__PURE__*/React.createElement("form", {
     id: "locForm",
-    onSubmit: handleDomo,
+    onSubmit: handleLocation,
     name: "locForm",
     action: "/maker",
     method: "POST",
@@ -47,6 +75,7 @@ var LocForm = function LocForm(props) {
     name: "z",
     placeholder: "z-coordinate"
   }), /*#__PURE__*/React.createElement("input", {
+    id: "_csrfID",
     type: "hidden",
     name: "_csrf",
     value: props.csrf
@@ -77,17 +106,32 @@ var LocList = function LocList(props) {
     }), /*#__PURE__*/React.createElement("h3", {
       className: "Name"
     }, " Name: ", location.name, " "), /*#__PURE__*/React.createElement("h4", {
-      className: "xPos"
+      id: "xCoord",
+      className: "xPos",
+      value: location.x
     }, " X-Coordinate: ", location.x), /*#__PURE__*/React.createElement("h4", {
-      className: "zPos"
-    }, " Z-Coordinate: ", location.z), /*#__PURE__*/React.createElement("p", null, "this is my house location"));
+      id: "zCoord",
+      className: "zPos",
+      value: location.z
+    }, " Z-Coordinate: ", location.z), /*#__PURE__*/React.createElement("p", null, "this is my house location"), /*#__PURE__*/React.createElement("button", {
+      className: "deleteLocation",
+      onClick: deleteLocation,
+      type: "button",
+      "data-location-id": location._id
+    }, "Delete Location"), /*#__PURE__*/React.createElement("button", {
+      className: "deleteLocation",
+      onClick: copyText,
+      type: "button",
+      "data-location-x": location.x,
+      "data-location-z": location.z
+    }, "Copy"));
   });
   return /*#__PURE__*/React.createElement("div", {
     className: "locList"
   }, locNodes);
 };
 
-var loadDomosFromServer = function loadDomosFromServer() {
+var loadLocationsFromServer = function loadLocationsFromServer() {
   sendAjax('GET', '/getLocations', null, function (data) {
     ReactDOM.render( /*#__PURE__*/React.createElement(LocList, {
       locs: data.locs
@@ -102,7 +146,7 @@ var setup = function setup(csrf) {
   ReactDOM.render( /*#__PURE__*/React.createElement(LocForm, {
     locs: []
   }), document.querySelector("#locations"));
-  loadDomosFromServer();
+  loadLocationsFromServer();
 };
 
 var getToken = function getToken() {

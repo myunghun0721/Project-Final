@@ -54,6 +54,29 @@ const getLocations = (request, response) => {
 	});
 };
 
+// delete location
+const deleteLocation = (request, response) => {
+  const req = request;
+  const res = response;
+
+  return Location.LocModel.findByOwner(req.session.account._id, (err) => {
+    if (err) {
+      console.log(err);
+      return res.status(400).json({ error: 'An error occurred' });
+    }
+
+    return Location.LocModel.deleteOne({ _id: req.body.location_id }, (err1) => {
+      if (err1) {
+        console.log("line 70" + err2);
+        return res.status(400).json({ error: 'An error occurred' });
+      }
+      return res.json({ action: 'success!' });
+    });
+  });
+};
+
 module.exports.makerPage = makerPage;
 module.exports.getLocations = getLocations;
 module.exports.make = makeLocation;
+module.exports.deleteLocation = deleteLocation;
+

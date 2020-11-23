@@ -9,6 +9,7 @@ html, body {
     background-repeat: no-repeat;
     background-size: cover;
     font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
 }
 
 #logo {
@@ -160,7 +161,7 @@ nav:nth-child(1) {
 #eMessage {
     display:none;
     top: 230px;
-    width: 260px;
+    width: 290px;
     position: absolute;
     z-index: 200;
     right: 300px;
@@ -183,42 +184,34 @@ nav:nth-child(1) {
 
 #errorMessage {
     font-size: 1em;
-    font-weight: bold;
     color: rgb(83, 50, 0);
     font-style: bold;
 }
 
-#location {
-    z-index: 225;
-    margin-top: -20px;
-    margin-left: 135px;
-    height: 450px;
-    width: 300px;
-    -ms-transform: rotate(330deg);
-    -webkit-transform: rotate(330deg); 
-    transform: rotate(330deg);
-}
 
 #locations {
     width: 80%;
-    min-width: 400px;
-    border: 2px solid black;
+    border: 2px solid rgb(83, 50, 0);
     border-radius: 4px;
     margin: 0 auto;
     margin-top: 100px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-image: url('http://charliecowan.co.uk/mcbuttongenerator/button_center.png');
 }
 
 .location {
-    width: 90%;
+    width: 60%;
     margin: 0 auto;
     margin-top: 2px;
-    margin-bottom: 2px;
-    border: 2px solid violet;
+    margin-bottom: 10px;
+    border: 2px solid rgb(197, 163, 13);
     border-radius: 4px;
-    background-color: yellow;
+    background-color: #2f9c41;
     padding: 10px;
     min-height:60px;
     overflow: hidden;
+    position: center;
 }
 .location p {
     
@@ -283,4 +276,38 @@ input {
     padding-top: 3px;
     padding-bottom: 3px;
     color: white;
+}
+
+button.deleteLocation {
+    height: 40px;
+    width: 200px;
+    outline: 2px solid black;
+    position: relative;
+    margin: 0;
+    display: inline-block;
+    background-image: url('http://charliecowan.co.uk/mcbuttongenerator/button_center.png');
+    background-repeat: repeat;
+    padding: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+    text-align: center;
+    color: white;
+    text-shadow: 3px 3px #4C4C4C;
+    border-bottom: 4px solid #565656;
+    border-right: 2px solid #565656;
+    border-left: 2px solid #AAA;
+    border-top: 2px solid #AAA;
+    box-sizing: border-box;
+    font-size: 16px;
+
+}
+
+  
+button.deleteLocation:hover {
+    border-bottom: 4px solid #59639A;
+    border-right: 2px solid #59639A;
+    border-left: 2px solid #BDC6FF;
+    border-top: 2px solid #BDC6FF;
+    background-image: url('http://charliecowan.co.uk/mcbuttongenerator/button_active_center.png');
+    color: #FFFFA0;
 }
