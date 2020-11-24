@@ -197,7 +197,7 @@ nav:nth-child(1) {
     margin-top: 100px;
     padding-top: 10px;
     padding-bottom: 10px;
-    background-image: url('http://charliecowan.co.uk/mcbuttongenerator/button_center.png');
+    background-color: #565656;
 }
 
 .location {
@@ -285,8 +285,6 @@ button.deleteLocation {
     position: relative;
     margin: 0;
     display: inline-block;
-    background-image: url('http://charliecowan.co.uk/mcbuttongenerator/button_center.png');
-    background-repeat: repeat;
     padding: 10px;
     margin-left: 5px;
     margin-right: 5px;
@@ -299,6 +297,7 @@ button.deleteLocation {
     border-top: 2px solid #AAA;
     box-sizing: border-box;
     font-size: 16px;
+    background-color: #565656;;
 
 }
 
@@ -308,6 +307,5 @@ button.deleteLocation:hover {
     border-right: 2px solid #59639A;
     border-left: 2px solid #BDC6FF;
     border-top: 2px solid #BDC6FF;
-    background-image: url('http://charliecowan.co.uk/mcbuttongenerator/button_active_center.png');
     color: #FFFFA0;
 }
