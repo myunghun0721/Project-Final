@@ -45,7 +45,6 @@ const redisClient = redis.createClient({
   password: redisPASS,
 });
 
-
 // Pull in our routes
 const router = require('./router.js');
 
@@ -84,7 +83,6 @@ app.use((err, req, res, next) => {
   console.log('Missing CSRF token');
   return false;
 });
-
 
 router(app);
 

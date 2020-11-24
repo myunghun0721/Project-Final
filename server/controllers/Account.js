@@ -1,6 +1,6 @@
 const models = require('../models');
 
-const Account = models.Account;
+const { Account } = models;
 
 const loginPage = (req, res) => {
   res.render('login', { csrfToken: req.csrfToken() });
@@ -19,7 +19,7 @@ const login = (request, response) => {
   const req = request;
   const res = response;
 
-		// force cast to string to cover some security flaws
+  // force cast to string to cover some security flaws
   const username = `${req.body.username}`;
   const password = `${req.body.pass}`;
 
@@ -79,8 +79,6 @@ const signup = (request, response) => {
     });
   });
 };
-
-
 
 const getToken = (request, response) => {
   const req = request;

@@ -1,6 +1,6 @@
 const models = require('../models');
 
-const Location = models.Location;
+const { Location } = models;
 
 const makerPage = (req, res) => {
   Location.LocModel.findByOwner(req.session.account._id, (err, docs) => {
@@ -42,16 +42,16 @@ const makeLocation = (req, res) => {
 };
 
 const getLocations = (request, response) => {
-	const req = request;
-	const res = response;
-	
-	return Location.LocModel.findByOwner(req.session.account._id, (err,docs)=> {
-		if(err){
-			console.log(err);
-			return res.status(400).json({error: 'An error occurred'});
-		}
-		return res.json({locs:docs});
-	});
+  const req = request;
+  const res = response;
+
+  return Location.LocModel.findByOwner(req.session.account._id, (err, docs) => {
+    if (err) {
+      console.log(err);
+      return res.status(400).json({ error: 'An error occurred' });
+    }
+    return res.json({ locs: docs });
+  });
 };
 
 // delete location
@@ -67,7 +67,6 @@ const deleteLocation = (request, response) => {
 
     return Location.LocModel.deleteOne({ _id: req.body.location_id }, (err1) => {
       if (err1) {
-        console.log("line 70" + err2);
         return res.status(400).json({ error: 'An error occurred' });
       }
       return res.json({ action: 'success!' });
@@ -79,4 +78,3 @@ module.exports.makerPage = makerPage;
 module.exports.getLocations = getLocations;
 module.exports.make = makeLocation;
 module.exports.deleteLocation = deleteLocation;
-
