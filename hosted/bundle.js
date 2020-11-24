@@ -33,16 +33,16 @@ var copyText = function copyText(e) {
   var zPos = "".concat(e.target.getAttribute("data-location-x")); // tp 1058 71 -827
 
   var coordinate = "tp";
-  coordinate += " ".concat(xPos);
-  coordinate += "";
   coordinate += " ".concat(zPos);
+  coordinate += "";
+  coordinate += " ".concat(xPos);
   var el = document.createElement('textarea');
   el.value = coordinate;
   document.body.appendChild(el);
   el.select();
   document.execCommand('copy');
   document.body.removeChild(el);
-  alert("Copied!");
+  alert("Copied! " + el.value);
 };
 
 var LocForm = function LocForm(props) {
@@ -113,7 +113,7 @@ var LocList = function LocList(props) {
       id: "zCoord",
       className: "zPos",
       value: location.z
-    }, " Z-Coordinate: ", location.z), /*#__PURE__*/React.createElement("p", null, "this is my house location"), /*#__PURE__*/React.createElement("button", {
+    }, " Z-Coordinate: ", location.z), /*#__PURE__*/React.createElement("p", null), /*#__PURE__*/React.createElement("button", {
       className: "deleteLocation",
       onClick: deleteLocation,
       type: "button",

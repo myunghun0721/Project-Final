@@ -35,9 +35,9 @@ const copyText = (e) => {
 	let zPos = `${e.target.getAttribute("data-location-x")}`;
 	// tp 1058 71 -827
 	let coordinate = `tp`;
-	coordinate += ` ${xPos}`;
-	coordinate += ``;
 	coordinate += ` ${zPos}`;
+	coordinate += ``;
+	coordinate += ` ${xPos}`;
 
 	const el = document.createElement('textarea');
 	el.value = coordinate;
@@ -46,7 +46,7 @@ const copyText = (e) => {
 	document.execCommand('copy');
 	document.body.removeChild(el);
 
-	alert("Copied!");
+	alert("Copied! " + el.value);
 }
 
 
@@ -88,7 +88,7 @@ const LocList = function(props) {
 				<h3 className="Name"> Name: {location.name} </h3>
 				<h4 id="xCoord"className="xPos" value={location.x}> X-Coordinate: {location.x}</h4>
 				<h4 id="zCoord" className="zPos" value={location.z}> Z-Coordinate: {location.z}</h4>
-				<p>this is my house location</p>
+				<p></p>
 				<button className="deleteLocation" onClick={deleteLocation} type="button" data-location-id={location._id}>Delete Location</button> 
 				<button className="deleteLocation" onClick={copyText} type="button" data-location-x={location.x} data-location-z={location.z}>Copy</button> 
 			</div>

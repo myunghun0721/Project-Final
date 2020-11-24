@@ -24,7 +24,7 @@ const handleSignup = (e) => {
 		return false;
 	}
 	if($("#pass").val() !== $("#pass2").val()){
-		handleError("Passwords do not match");
+		handleError("Passwords do not match!!");
 		return false;
 	}
 	
@@ -73,6 +73,7 @@ const SignupWindow = (props) => {
 	);
 };
 
+
 const createLoginWindow = (csrf) => {
 	ReactDOM.render(
 	  <LoginWindow csrf={csrf} />,
@@ -87,10 +88,12 @@ const createSignupWindow = (csrf) => {
 	);
 };
 
+
 const setup = (csrf) => {
 	const loginButton = document.querySelector("#loginButton");
 	const signupButton = document.querySelector("#signupButton");
 	
+
 	signupButton.addEventListener("click",(e)=> {
 		e.preventDefault();
 		createSignupWindow(csrf);
@@ -102,6 +105,8 @@ const setup = (csrf) => {
 		createLoginWindow(crsf);
 		return false;
 	});
+
+
 	
 	createLoginWindow(csrf);
 };
@@ -111,6 +116,7 @@ const getToken = () => {
 		setup(result.csrfToken);
 	});
 };
+
 
 $(document).ready(function() {
 	getToken();

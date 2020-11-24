@@ -28,7 +28,7 @@ var handleSignup = function handleSignup(e) {
   }
 
   if ($("#pass").val() !== $("#pass2").val()) {
-    handleError("Passwords do not match");
+    handleError("Passwords do not match!!");
     return false;
   }
 
