@@ -47,35 +47,45 @@ var copyText = function copyText(e) {
 };
 
 var LocForm = function LocForm(props) {
-  return /*#__PURE__*/React.createElement("form", {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "popup",
+    id: "popup-1"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "overlay"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "content"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "close-btn",
+    onClick: popUp
+  }, "\xD7"), /*#__PURE__*/React.createElement("form", {
     id: "locForm",
     onSubmit: handleLocation,
     name: "locForm",
     action: "/maker",
     method: "POST",
     className: "locForm"
-  }, /*#__PURE__*/React.createElement("label", {
+  }, /*#__PURE__*/React.createElement("h3", {
     htmlFor: "name"
   }, "Name: "), /*#__PURE__*/React.createElement("input", {
     id: "Name",
     type: "text",
     name: "name",
     placeholder: "Name"
-  }), /*#__PURE__*/React.createElement("label", {
+  }), /*#__PURE__*/React.createElement("h3", {
     htmlFor: "x"
   }, "xPos:"), /*#__PURE__*/React.createElement("input", {
     id: "xPos",
     type: "text",
     name: "x",
     placeholder: "x-coordinate"
-  }), /*#__PURE__*/React.createElement("label", {
+  }), /*#__PURE__*/React.createElement("h3", {
     htmlFor: "y"
   }, "yPos:"), /*#__PURE__*/React.createElement("input", {
     id: "yPos",
     type: "text",
     name: "y",
     placeholder: "y-coordinate"
-  }), /*#__PURE__*/React.createElement("label", {
+  }), /*#__PURE__*/React.createElement("h3", {
     htmlFor: "z"
   }, "zPos:"), /*#__PURE__*/React.createElement("input", {
     id: "zPos",
@@ -91,7 +101,7 @@ var LocForm = function LocForm(props) {
     className: "LocationSubmit",
     type: "submit",
     value: "Save Coordinate"
-  }));
+  }))));
 };
 
 var LocList = function LocList(props) {
@@ -159,17 +169,20 @@ var setup = function setup(csrf) {
   ReactDOM.render( /*#__PURE__*/React.createElement(LocForm, {
     locs: []
   }), document.querySelector("#locations"));
+  ReactDOM.render( /*#__PURE__*/React.createElement(MyButton, {
+    label: "Add Location"
+  }), document.querySelector("#buttonSpan"));
   loadLocationsFromServer();
 };
 
-var loadUsersXHR = function loadUsersXHR() {
-  console.log("loadUsersXHR");
+var popUp = function popUp() {
+  document.querySelector("#popup-1").classList.toggle("active");
 };
 
 var MyButton = function MyButton(props) {
   return /*#__PURE__*/React.createElement("button", {
-    onClick: loadUsersXHR
-  }, " ", props.label);
+    onClick: popUp
+  }, " ", props.label, " ");
 };
 
 var getToken = function getToken() {

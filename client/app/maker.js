@@ -26,6 +26,7 @@ const deleteLocation = (e) => {
     return false; 
 }; 
 
+
 // copy x z coordinate
 const copyText = (e) => {
 	e.preventDefault(); 
@@ -54,24 +55,32 @@ const copyText = (e) => {
 
 const LocForm = (props) => {
 	return(
-	<form id="locForm"
-		onSubmit={handleLocation}
-		name="locForm"
-		action="/maker"
-		method="POST"
-		className="locForm"
-	>
-	  <label htmlFor="name">Name: </label>
-	  <input id="Name" type="text" name="name" placeholder="Name"/>
-	  <label htmlFor="x">xPos:</label>
-	  <input id="xPos" type="text" name="x" placeholder="x-coordinate"/>
-	  <label htmlFor="y">yPos:</label>
-	  <input id="yPos" type="text" name="y" placeholder="y-coordinate"/>
-	  <label htmlFor="z">zPos:</label>
-	  <input id="zPos" type="text" name="z" placeholder="z-coordinate"/>
-	  <input id ="_csrfID" type="hidden" name="_csrf" value={props.csrf}/>
-	  <input className="LocationSubmit" type="submit" value="Save Coordinate"/>
-	</form>
+	<div className="popup" id="popup-1">
+		<div className="overlay"></div>
+			<div className="content">
+			<div className="close-btn" onClick={popUp}>&times;</div>
+				<form id="locForm"
+				onSubmit={handleLocation}
+				name="locForm"
+				action="/maker"
+				method="POST"
+				className="locForm"
+				>
+				<h3 htmlFor="name">Name: </h3>
+				<input id="Name" type="text" name="name" placeholder="Name"/>
+				<h3 htmlFor="x">xPos:</h3>
+				<input id="xPos" type="text" name="x" placeholder="x-coordinate"/>
+				<h3 htmlFor="y">yPos:</h3>
+				<input id="yPos" type="text" name="y" placeholder="y-coordinate"/>
+				<h3 htmlFor="z">zPos:</h3>
+				<input id="zPos" type="text" name="z" placeholder="z-coordinate"/>
+				<input id ="_csrfID" type="hidden" name="_csrf" value={props.csrf}/>
+				<input className="LocationSubmit" type="submit" value="Save Coordinate"/>
+				</form>
+		</div>
+	  </div>
+
+
 	);
 };
 
@@ -121,17 +130,22 @@ const setup = function(csrf) {
 	ReactDOM.render(
 		<LocForm locs={[]}/>, document.querySelector("#locations")
 	);
+
+	ReactDOM.render(
+		<MyButton label={"Add Location"}/>, document.querySelector("#buttonSpan")
+	);
+
 	
 	loadLocationsFromServer();
 };
 
-const loadUsersXHR = () => {
-	console.log("loadUsersXHR");
+const popUp = () => {
+	document.querySelector("#popup-1").classList.toggle("active");
 };
 
 const MyButton = (props) => {
 	return (
-	<button onClick={loadUsersXHR}> { props.label }</button>
+	<button onClick={popUp}> {props.label} </button>
 	);
 };
 
