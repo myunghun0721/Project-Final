@@ -213,8 +213,9 @@ nav:nth-child(1) {
     overflow: hidden;
     position: center;
 }
-.location p {
-    
+#Coord {
+    margin-right: 15%;
+    text-align: right;
 }
 
 .location:hover {

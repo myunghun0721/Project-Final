@@ -13,12 +13,13 @@ const makerPage = (req, res) => {
   });
 };
 const makeLocation = (req, res) => {
-  if (!req.body.name || !req.body.x || !req.body.z) {
+  if (!req.body.name || !req.body.x || !req.body.y || !req.body.z) {
     return res.status(400).json({ error: 'Both name and x and z coordinates are required' });
   }
   const locData = {
     name: req.body.name,
     x: req.body.x,
+    y: req.body.y,
     z: req.body.z,
     owner: req.session.account._id,
   };

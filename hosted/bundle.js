@@ -6,7 +6,7 @@ var handleLocation = function handleLocation(e) {
     width: 'hide'
   }, 350);
 
-  if ($("#Name").val() == '' || $("#xPos").val() == '' || $("#zPos") == '') {
+  if ($("#Name").val() == '' || $("#xPos").val() == '' || $("#yPos").val() == '' || $("#zPos") == '') {
     handleError("All fields are required");
     return false;
   }
@@ -30,11 +30,12 @@ var deleteLocation = function deleteLocation(e) {
 var copyText = function copyText(e) {
   e.preventDefault();
   var xPos = "".concat(e.target.getAttribute("data-location-z"));
+  var yPos = "".concat(e.target.getAttribute("data-location-y"));
   var zPos = "".concat(e.target.getAttribute("data-location-x")); // tp 1058 71 -827
 
   var coordinate = "tp";
   coordinate += " ".concat(zPos);
-  coordinate += "";
+  coordinate += " ".concat(yPos);
   coordinate += " ".concat(xPos);
   var el = document.createElement('textarea');
   el.value = coordinate;
@@ -42,7 +43,7 @@ var copyText = function copyText(e) {
   el.select();
   document.execCommand('copy');
   document.body.removeChild(el);
-  alert("Copied! " + el.value);
+  alert("Copied Location: " + el.value);
 };
 
 var LocForm = function LocForm(props) {
@@ -67,6 +68,13 @@ var LocForm = function LocForm(props) {
     type: "text",
     name: "x",
     placeholder: "x-coordinate"
+  }), /*#__PURE__*/React.createElement("label", {
+    htmlFor: "y"
+  }, "yPos:"), /*#__PURE__*/React.createElement("input", {
+    id: "yPos",
+    type: "text",
+    name: "y",
+    placeholder: "y-coordinate"
   }), /*#__PURE__*/React.createElement("label", {
     htmlFor: "z"
   }, "zPos:"), /*#__PURE__*/React.createElement("input", {
@@ -106,11 +114,15 @@ var LocList = function LocList(props) {
     }), /*#__PURE__*/React.createElement("h3", {
       className: "Name"
     }, " Name: ", location.name, " "), /*#__PURE__*/React.createElement("h4", {
-      id: "xCoord",
+      id: "Coord",
       className: "xPos",
       value: location.x
     }, " X-Coordinate: ", location.x), /*#__PURE__*/React.createElement("h4", {
-      id: "zCoord",
+      id: "Coord",
+      className: "yPos",
+      value: location.y
+    }, " Y-Coordinate: ", location.y), /*#__PURE__*/React.createElement("h4", {
+      id: "Coord",
       className: "zPos",
       value: location.z
     }, " Z-Coordinate: ", location.z), /*#__PURE__*/React.createElement("p", null), /*#__PURE__*/React.createElement("button", {
@@ -123,6 +135,7 @@ var LocList = function LocList(props) {
       onClick: copyText,
       type: "button",
       "data-location-x": location.x,
+      "data-location-y": location.y,
       "data-location-z": location.z
     }, "Copy"));
   });
@@ -147,6 +160,16 @@ var setup = function setup(csrf) {
     locs: []
   }), document.querySelector("#locations"));
   loadLocationsFromServer();
+};
+
+var loadUsersXHR = function loadUsersXHR() {
+  console.log("loadUsersXHR");
+};
+
+var MyButton = function MyButton(props) {
+  return /*#__PURE__*/React.createElement("button", {
+    onClick: loadUsersXHR
+  }, " ", props.label);
 };
 
 var getToken = function getToken() {

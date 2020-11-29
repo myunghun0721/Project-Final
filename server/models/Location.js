@@ -20,6 +20,10 @@ const LocSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  y: {
+    type: Number,
+    required: true,
+  },
 
   z: {
     type: Number,
@@ -41,6 +45,7 @@ const LocSchema = new mongoose.Schema({
 LocSchema.statics.toAPI = (doc) => ({
   name: doc.name,
   x: doc.x,
+  y: doc.y,
   z: doc.z,
 });
 
@@ -49,7 +54,7 @@ LocSchema.statics.findByOwner = (ownerId, callback) => {
     owner: convertId(ownerId),
   };
 
-  return LocModel.find(search).select('name x z').lean().exec(callback);
+  return LocModel.find(search).select('name x y z').lean().exec(callback);
 };
 
 LocModel = mongoose.model('Location', LocSchema);
