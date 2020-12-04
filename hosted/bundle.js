@@ -24,15 +24,14 @@ var deleteLocation = function deleteLocation(e) {
     loadLocationsFromServer();
   });
   return false;
-}; // copy x z coordinate
+}; // copy x y z coordinate
 
 
 var copyText = function copyText(e) {
   e.preventDefault();
   var xPos = "".concat(e.target.getAttribute("data-location-z"));
   var yPos = "".concat(e.target.getAttribute("data-location-y"));
-  var zPos = "".concat(e.target.getAttribute("data-location-x")); // tp 1058 71 -827
-
+  var zPos = "".concat(e.target.getAttribute("data-location-x"));
   var coordinate = "tp";
   coordinate += " ".concat(zPos);
   coordinate += " ".concat(yPos);
@@ -44,7 +43,20 @@ var copyText = function copyText(e) {
   document.execCommand('copy');
   document.body.removeChild(el);
   alert("Copied Location: " + el.value);
-};
+}; // show / hide pop-up
+
+
+var popUp = function popUp() {
+  document.querySelector("#popup-1").classList.toggle("active");
+}; // Add Location button
+
+
+var MyButton = function MyButton(props) {
+  return /*#__PURE__*/React.createElement("button", {
+    onClick: popUp
+  }, " ", props.label, " ");
+}; // location form (hidden untill Add Location button pressed)
+
 
 var LocForm = function LocForm(props) {
   return /*#__PURE__*/React.createElement("div", {
@@ -173,16 +185,6 @@ var setup = function setup(csrf) {
     label: "Add Location"
   }), document.querySelector("#buttonSpan"));
   loadLocationsFromServer();
-};
-
-var popUp = function popUp() {
-  document.querySelector("#popup-1").classList.toggle("active");
-};
-
-var MyButton = function MyButton(props) {
-  return /*#__PURE__*/React.createElement("button", {
-    onClick: popUp
-  }, " ", props.label, " ");
 };
 
 var getToken = function getToken() {

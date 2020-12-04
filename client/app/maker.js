@@ -27,15 +27,14 @@ const deleteLocation = (e) => {
 }; 
 
 
-// copy x z coordinate
+// copy x y z coordinate
 const copyText = (e) => {
 	e.preventDefault(); 
-
 
 	let xPos = `${e.target.getAttribute("data-location-z")}`;
 	let yPos = `${e.target.getAttribute("data-location-y")}`;
 	let zPos = `${e.target.getAttribute("data-location-x")}`;
-	// tp 1058 71 -827
+
 	let coordinate = `tp`;
 	coordinate += ` ${zPos}`;
 	coordinate += ` ${yPos}`;
@@ -51,8 +50,19 @@ const copyText = (e) => {
 	alert("Copied Location: " + el.value);
 }
 
+// show / hide pop-up
+const popUp = () => {
+	document.querySelector("#popup-1").classList.toggle("active");
+};
 
+// Add Location button
+const MyButton = (props) => {
+	return (
+	<button onClick={popUp}> {props.label} </button>
+	);
+};
 
+// location form (hidden untill Add Location button pressed)
 const LocForm = (props) => {
 	return(
 	<div className="popup" id="popup-1">
@@ -137,16 +147,6 @@ const setup = function(csrf) {
 
 	
 	loadLocationsFromServer();
-};
-
-const popUp = () => {
-	document.querySelector("#popup-1").classList.toggle("active");
-};
-
-const MyButton = (props) => {
-	return (
-	<button onClick={popUp}> {props.label} </button>
-	);
 };
 
 const getToken = () => {
